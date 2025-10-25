@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="DevFolio Bootstrap Portfolio Template" />
+    <meta name="keywords" />
+    <link
+      rel="shortcut icon"
+      href="./images/operational-system.png"
+      type="image/x-icon"
+    />
+    <title>CARE - hospital management system - CRUD operations</title>
+    <!-- * stylesheets font awesome -->
+    <link rel="stylesheet" href="./css/all.min.css" />
+    <!-- * stylesheets google-fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- * Bootstrap-css -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <!-- * stylesheets my-css -->
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <main>
+      <section>
+        <div class="row">
+          <div class="col-lg-2 invisible">
+            <!-- Sidebar -->
+            <aside
+              class="sidebar text-white position-fixed start-0 d-flex flex-column vh-100 pe-0"
+            >
+              <div
+                class="logo d-flex align-content-center justify-content-start mb-2 mt-1 gap-2 p-4"
+              >
+                <i class="fa-solid fa-stethoscope align-self-center fa-5"></i>
+                <h5 class="mb-0">Care</h5>
+              </div>
+              <ul class="nav flex-column gap-1">
+                <li class="px-4 main-menu text-white-50 pb-2 position-relative">
+                  <a href="#" class="nav-link text-white-50 ps-0"> Main menu</a>
+                </li>
+                <li class="px-4">
+                  <a href="#" class="nav-link text-white-50 ps-0"
+                    ><i class="fa-solid fa-chart-line me-2"></i> Overview</a
+                  >
+                </li>
+                <li class="px-4">
+                  <a href="#" class="nav-link text-white-50 ps-0"
+                    ><i class="fa-solid fa-bell me-2"></i> Notifications</a
+                  >
+                </li>
+                <li class="active px-4">
+                  <a href="#" class="nav-link active text-white ps-0"
+                    ><i class="fa-solid fa-users me-2"></i> Department</a
+                  >
+                </li>
+                <li class="px-4">
+                  <a href="#" class="nav-link text-white-50 ps-0"
+                    ><i class="fa-solid fa-user-injured me-2"></i> Patients</a
+                  >
+                </li>
+                <li class="px-4">
+                  <a href="#" class="nav-link text-white-50 ps-0"
+                    ><i class="fa-solid fa-boxes-stacked me-2"></i> Inventory</a
+                  >
+                </li>
+                <li class="px-4 position-relative mess">
+                  <a href="#" class="nav-link text-white-50 ps-0"
+                    ><i class="fa-solid fa-envelope me-2"></i> Messages</a
+                  >
+                </li>
+                <li
+                  class="px-4 main-menu text-white-50 pb-2 mt-2 position-relative"
+                >
+                  <a href="#" class="nav-link text-white-50 ps-0">
+                    Prefrences</a
+                  >
+                </li>
+                <li class="px-4">
+                  <a href="#" class="nav-link text-white-50 ps-0"
+                    ><i class="fa-solid fa-user me-2"></i> Profile</a
+                  >
+                </li>
+                <li class="px-4 position-relative">
+                  <a href="#" class="nav-link text-white-50 ps-0"
+                    ><i class="fa-solid fa-gear me-2"></i> Settings</a
+                  >
+                </li>
+              </ul>
+            </aside>
+          </div>
+          <div class="col-12 col-lg-10">
+            <div class="container px-4">
+              <div class="department-text">
+                <h5 class="mt-4 mb-2 pb-2 text-start position-relative">
+                  Department
+                </h5>
+                <h6 class="text-start fw-light">
+                  <span class="fw-semibold"> Department > </span>Doctor List
+                </h6>
+              </div>
+              <div class="row g-3">
+                <div class="col-lg-4">
+                  <div class="py-3">
+                    <form>
+                      <button
+                        type="button"
+                        onclick="addDoctor()"
+                        class="btn btn-outline-primary btn-sm mb-3"
+                      >
+                        <i class="fa-solid fa-circle-plus"></i> ADD New Doctor
+                      </button>
+                      <div class="form-floating mb-1">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="doctorName"
+                          placeholder="Dr_Alaa_Ashraf"
+                          onchange="validate(doctorNameRegex, doctorNameInput)"
+                        />
+                        <h4 class="error text-danger m-0 invisible">
+                          "Doctor Name starts with an uppercase letter followed
+                          by 3-16 (Letters, - , _ )."
+                        </h4>
+                        <label for="doctorName">Doctor Name</label>
+                      </div>
+
+                      <div class="form-floating mb-1">
+                        <textarea
+                          class="form-control"
+                          placeholder="Doctor Profile Details"
+                          id="doctorProfileDetails"
+                          style="height: 80px"
+                          onchange="validate(doctorProfileDetailsRegex, doctorProfileDetailsInput)"
+                        ></textarea>
+                        <h4 class="error text-danger m-0 invisible">
+                          "Doctor Profile starts with an uppercase letter
+                          followed by 26 (Letters, numbers, spaces)."
+                        </h4>
+                        <label for="doctorProfileDetails"
+                          >Doctor Profile Details</label
+                        >
+                      </div>
+
+                      <div class="form-floating mb-1">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="doctorFees"
+                          placeholder="Enter fees (100-2000)"
+                          onchange="validate(doctorFeesRegex, doctorFeesInput)"
+                        />
+                        <h4 class="error text-danger m-0 invisible">
+                          "Doctor Fees must be a numeric value between 100 and
+                          2000."
+                        </h4>
+                        <label for="doctorFees">Doctor Fees</label>
+                      </div>
+
+                      <select
+                        id="doctorSpecialization"
+                        class="form-select form-control mb-1"
+                        aria-label="Default select example"
+                        required
+                        onchange="validateSpecialization()"
+                      >
+                        <option value="" disabled selected>
+                          Doctor Specialization
+                        </option>
+                        <option value="cardiologist">Cardiologist</option>
+                        <option value="dermatologist">Dermatologist</option>
+                        <option value="neurologist">Neurologist</option>
+                        <option value="pediatrician">Pediatrician</option>
+                        <option value="orthopedic">Orthopedic Surgeon</option>
+                        <option value="psychiatrist">Psychiatrist</option>
+                        <option value="gynecologist">Gynecologist</option>
+                        <option value="radiologist">Radiologist</option>
+                        <option value="urologist">Urologist</option>
+                        <option value="general_surgeon">General Surgeon</option>
+                      </select>
+                      <h4 class="error text-danger m-0 invisible">
+                        "Please select a Doctor Specialization."
+                      </h4>
+
+                      <div class="form-check mb-0">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="doctorstatus"
+                          id="doctorstatus-online"
+                          value="online"
+                        />
+                        <label
+                          class="form-check-label"
+                          for="doctorstatus-online"
+                        >
+                          Online
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-0">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="doctorstatus"
+                          id="doctorstatus-away"
+                          value="away"
+                        />
+                        <label class="form-check-label" for="doctorstatus-away">
+                          Away
+                        </label>
+                      </div>
+
+                      <div class="form-check mb-1">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="doctorstatus"
+                          id="doctorstatus-offline"
+                          value="offline"
+                          checked
+                        />
+                        <label
+                          class="form-check-label"
+                          for="doctorstatus-offline"
+                        >
+                          Offline
+                        </label>
+                      </div>
+
+                      <div class="mb-1">
+                        <input
+                          class="form-control form-control-sm mt-2"
+                          id="doctorImage"
+                          type="file"
+                        />
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                <div class="col-lg-8 vh-100">
+                  <div class="row align-content-center mb-3 mx-0">
+                    <div class="search col-md-10 p-0">
+                      <div class="py-3">
+                        <form class="d-flex" role="search">
+                          <input
+                            class="form-control me-2"
+                            type="search"
+                            placeholder="Search Doctors ......"
+                            aria-label="Search"
+                            id="searchDoctorsinput"
+                            oninput="searchDoctors()"
+                          />
+                        </form>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      class="btn btn-outline-danger btn-sm col-md-2 h-auto align-self-center h6 m-0"
+                      onclick="deleteDoctorAll()"
+                    >
+                      Delete All
+                    </button>
+                  </div>
+
+                  <div class="row gy-3" id="card-container"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- sweet Alert library -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- bootstrap library -->
+    <script src="./js/bootstrap.bundle.min.js"></script>
+    <!-- my js.script -->
+    <script src="./js/script.js"></script>
+  </body>
+</html>
